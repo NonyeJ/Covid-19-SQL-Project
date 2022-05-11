@@ -89,7 +89,7 @@ WHERE CDTH.continent is not null
 ORDER BY 2,3
 
 --USE Common Table Expression (CTE)
-With VACCvsPOPU (location, continent,new_vaccinations, date,Vaccinated_People_Per_Time)
+With VACCvsPOPU (Continent, Location, Date, Population, New_Vaccinations,Vaccinated_People_Per_Time)
 as
 (
 SELECT CDTH.continent,CDTH.location, CDTH.date,CDTH.population,SUM (CONVERT(int,CVCN.new_vaccinations)) OVER (Partition by CDTH.location order by CDTH.location, CDTH.date) AS Vaccinated_People_Per_Time
@@ -125,3 +125,5 @@ JOIN [Portfolio Project]..CovidVaccinations AS CVCN
 	ON CDTH.location=CVCN.location
 	and CDTH.date=CVCN.date
 WHERE CDTH.continent is not null
+
+
